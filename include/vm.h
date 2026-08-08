@@ -6,10 +6,13 @@
 #include <unordered_map>
 
 enum OpCode {
-    OP_CONSTANT,
-    OP_PRINT,
-    OP_ADD,
-    OP_HALT
+    OP_CONSTANT,    // Push constant value onto stack
+    OP_LOAD_VAR,    // Load variable value onto stack
+    OP_STORE_VAR,   // Store stack value into a variable
+    OP_ADD,         // Add top two stack elements
+    OP_SUBTRACT,    // Subtract top two stack elements
+    OP_PRINT,       // Print top of stack
+    OP_HALT         // Stop execution
 };
 
 class VirtualMachine {
