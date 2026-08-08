@@ -1,4 +1,6 @@
+#include "lexer.hpp"
 #include "token.hpp"
+#include <vector>
 #include <cstring>
 #include <cctype>
 #include <iostream>
