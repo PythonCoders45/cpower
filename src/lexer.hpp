@@ -1,34 +1,33 @@
-#ifndef LEXER_H
-#define LEXER_H
+#ifndef LEXER_HPP
+#define LEXER_HPP
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+#include <string>
+#include <vector>
 
-typedef enum {
+enum class TokenType {
     // End of File & Unknown
     TOKEN_EOF,
     TOKEN_UNKNOWN,
 
     // Data Types & Keywords
-    TOKEN_INT,
-    TOKEN_STRING,
-    TOKEN_BOOL,
-    TOKEN_VOID,
-    TOKEN_PRINT,
-    TOKEN_IF,
-    TOKEN_ELSE,
-    TOKEN_WHILE,
-    TOKEN_FOR,
-    TOKEN_BREAK,
-    TOKEN_CONTINUE,
-    TOKEN_CLASS,
-    TOKEN_ENUM,
-    TOKEN_LIST,
-    TOKEN_DICTIONARY,
-    TOKEN_PUBLIC,
-    TOKEN_PRIVATE,
-    TOKEN_RETURN,
+    KEYWORD_INT,
+    KEYWORD_STRING,
+    KEYWORD_BOOL,
+    KEYWORD_VOID,
+    KEYWORD_PRINT,
+    KEYWORD_IF,
+    KEYWORD_ELSE,
+    KEYWORD_WHILE,
+    KEYWORD_FOR,
+    KEYWORD_BREAK,
+    KEYWORD_CONTINUE,
+    KEYWORD_CLASS,
+    KEYWORD_ENUM,
+    KEYWORD_LIST,
+    KEYWORD_DICTIONARY,
+    KEYWORD_PUBLIC,
+    KEYWORD_PRIVATE,
+    KEYWORD_RETURN,
 
     // Literals & Identifiers
     TOKEN_IDENTIFIER,
@@ -57,8 +56,8 @@ typedef enum {
     TOKEN_GTE,           // >=
     TOKEN_NOT,           // !
     TOKEN_LOGICAL_AND,   // &&
-    TOKEN_LOGICAL_OR,    // ||
     TOKEN_BITWISE_AND,   // &
+    TOKEN_LOGICAL_OR,    // ||
     TOKEN_BITWISE_OR,    // |
 
     // Punctuation & Delimiters
@@ -72,20 +71,29 @@ typedef enum {
     TOKEN_RPAREN,        // )
     TOKEN_LBRACKET,      // [
     TOKEN_RBRACKET       // ]
-} TokenType;
+};
 
-typedef struct {
+struct Token {
     TokenType type;
-    char lexeme[128];
+    std::string text;
     int line;
     int col;
-} Token;
+};
 
-// Core lexing function with comprehensive state tracking
-Token next_token(const char** src, int* line_tracker, int* col_tracker);
+class Lexer {
+    std::string src;
+    size_t pos = 0;
+    int line = 1;
+    int col = 1;
 
-#ifdef __cplusplus
-}
-#endif
+    char peek();
+    char advance();
+    bool match(char expected);
+    void skipWhitespaceAndComments();
 
-#endif // LEXER_H
+public:
+    explicit Lexer(const std::string& source);
+    std::vector<Token> tokenize();
+};
+
+#endif // LEXER_HPP
