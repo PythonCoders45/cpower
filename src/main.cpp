@@ -2,9 +2,9 @@
 #include <fstream>
 #include <sstream>
 #include <vector>
-#include "../include/token.h"
-#include "../include/lexer.hpp"
-#include "../include/parser.hpp"
+#include "token.hpp"
+#include "lexer.hpp"
+#include "parser.hpp"
 #include "evaluator.hpp"
 
 // Helper function to read a .cp source file entirely into a string buffer
