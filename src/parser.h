@@ -7,7 +7,7 @@
 
 // Forward declare tokens from lexer.c
 extern "C" {
-    #include "lexer.h"
+    #include "lexer.hpp"
 }
 
 // AST Node base structures
