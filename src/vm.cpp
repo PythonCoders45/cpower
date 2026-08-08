@@ -27,6 +27,37 @@ void VirtualMachine::execute(const std::vector<uint8_t>& bytecode, const std::ve
                 push(a + b);
                 break;
             }
+            // Inside VirtualMachine::execute(...)
+            case OP_MULTIPLY: {
+                int b = pop();
+                int a = pop();
+                push(a * b);
+                break;
+            }
+            case OP_DIVIDE: {
+                int b = pop();
+                int a = pop();
+                if (b == 0) {
+                    std::cerr << "RuntimeError: Division by zero.\n";
+                    return;
+                }
+                push(a / b);
+                break;
+            }
+            case OP_JUMP: {
+                uint16_t target = (bytecode[ip] << 8) | bytecode[ip + 1];
+                ip = target;
+                break;
+            }
+            case OP_JUMP_IF_FALSE: {
+                uint16_t target = (bytecode[ip] << 8) | bytecode[ip + 1];
+                ip += 2;
+                int condition = pop();
+                if (condition == 0) {
+                    ip = target;
+                }
+                break;
+            }
             case OP_PRINT: {
                 int value = pop();
                 std::cout << value << "\n";
