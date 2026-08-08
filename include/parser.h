@@ -25,6 +25,12 @@ struct PrintNode : public ASTNode {
     std::string variableName;
 };
 
+struct BinaryExprNode : public ASTNode {
+    std::string op;
+    std::unique_ptr<ASTNode> left;
+    std::unique_ptr<ASTNode> right;
+};
+
 class CPowerParser {
 private:
     const char* sourceCursor;
