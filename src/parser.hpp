@@ -1,6 +1,7 @@
 #ifndef PARSER_HPP
 #define PARSER_HPP
 
+#include "lexer.hpp"
 #include "token.hpp" // Assuming you have a Token struct/class
 #include <string>
 #include <vector>
