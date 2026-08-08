@@ -5,14 +5,19 @@
 #include <string>
 #include <unordered_map>
 
+// Additions to enum OpCode in vm.h:
 enum OpCode {
-    OP_CONSTANT,    // Push constant value onto stack
-    OP_LOAD_VAR,    // Load variable value onto stack
-    OP_STORE_VAR,   // Store stack value into a variable
-    OP_ADD,         // Add top two stack elements
-    OP_SUBTRACT,    // Subtract top two stack elements
-    OP_PRINT,       // Print top of stack
-    OP_HALT         // Stop execution
+    OP_CONSTANT,
+    OP_LOAD_VAR,
+    OP_STORE_VAR,
+    OP_ADD,
+    OP_SUBTRACT,
+    OP_MULTIPLY,
+    OP_DIVIDE,
+    OP_PRINT,
+    OP_JUMP,            // Unconditional jump
+    OP_JUMP_IF_FALSE,   // Conditional jump for if/while
+    OP_HALT
 };
 
 class VirtualMachine {
